@@ -1,10 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
-
-// Removed SimpleParallax import because it's not React-friendly like that
-// You can consider a React-compatible parallax library or custom implementation
-
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebaseConfig";
 
