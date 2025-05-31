@@ -1,2 +1,12 @@
+# Firebase config (custom entry)
+# lib/firebaseConfig.js
+# Inside .gitignore
+.env.local
+
+
+# Power BI local settings and cache
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
+# Node modules
+node_modules

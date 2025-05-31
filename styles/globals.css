@@ -1,0 +1,37 @@
+:root {
+  --font-fnt_alpha: 'Alfa Slab One', sans-serif;
+  --font-h1_caveat: 'Caveat', cursive;
+}
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  /* WebKit-based browsers */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+   
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 0;
+   
+}
+
+
+h1 {
+  font-family: var(--font-h1_caveat);
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+p{
+  font-family: var(--font-fnt_alpha);
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
