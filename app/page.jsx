@@ -45,8 +45,8 @@ export default function Page() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <button onClick={() => scroll('left')} style={arrowStyle('left')} aria-label="Scroll Left">&larr;</button>
-      <button onClick={() => scroll('right')} style={arrowStyle('right')} aria-label="Scroll Right">&rarr;</button>
+      <button onClick={() => scroll('left')} style={arrowStyle('left',180)} aria-label="Scroll Left"><span style={{ lineHeight: 1 }}>➪</span></button>
+      <button onClick={() => scroll('right')} style={arrowStyle('right',0)} aria-label="Scroll Right"><span style={{ lineHeight: 1 }}>➪</span></button>
 
       <div
         ref={scrollRef}
@@ -112,7 +112,7 @@ const sectionStyle = (bg) => ({
   boxSizing: 'border-box',
 });
 
-const arrowStyle = (position) => ({
+const arrowStyle = (position, degree) => ({
   position: 'fixed',
   top: '50%',
   [position]: '20px',
@@ -125,12 +125,13 @@ const arrowStyle = (position) => ({
   height: '45px',
   cursor: 'pointer',
   boxShadow: '0 0 10px rgba(0,0,0,0.3)',
-  transform: 'translateY(-50%)',
+  transform: `translateY(-50%) rotate(${degree}deg)`,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   userSelect: 'none',
 });
+
 
 const pStyle = {
   maxWidth: '90vw',
