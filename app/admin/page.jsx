@@ -132,6 +132,9 @@ const styles = {
     maxWidth: "600px",
     margin: "0 auto",
     fontFamily: "Arial, sans-serif",
+    display:"flex",
+    flexDirection:'column',
+    gap:"1rem"
   },
   form: {
     display: "flex",
@@ -154,5 +157,6 @@ const styles = {
     ...this?.button,
     backgroundColor: "#e63946",
     marginBottom: "1rem",
+    maxWidth:"5rem"
   },
 };
