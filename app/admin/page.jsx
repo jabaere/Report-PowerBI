@@ -10,6 +10,9 @@ import {
   collection,
   addDoc,
   getDocs,
+  serverTimestamp, 
+  deleteDoc, 
+  doc
 } from "firebase/firestore";
 
 export default function AdminPage() {
@@ -51,19 +54,49 @@ export default function AdminPage() {
     setReports(data);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!title || !url) return;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!title || !url) return;
 
-    try {
-      await addDoc(collection(db, "reports"), { title, url });
-      setTitle("");
-      setUrl("");
-      fetchReports();
-    } catch (err) {
-      console.error("Error adding document: ", err);
-    }
-  };
+  //   try {
+  //     await addDoc(collection(db, "reports"), { title, url });
+  //     setTitle("");
+  //     setUrl("");
+  //     fetchReports();
+  //   } catch (err) {
+  //     console.error("Error adding document: ", err);
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!title || !url) return;
+
+  try {
+    const docRef = await addDoc(collection(db, "reports"), {
+      title,
+      url,
+      timestamp: serverTimestamp(),
+    });
+
+    setTitle("");
+    setUrl("");
+    fetchReports(); // refresh list
+  } catch (err) {
+    console.error("Error adding document: ", err);
+  }
+};
+
+
+const deleteReport = async (id) => {
+  try {
+    await deleteDoc(doc(db, "reports", id));
+    fetchReports(); // refresh list
+  } catch (error) {
+    console.error("Error deleting report:", error);
+  }
+};
+
 
   if (!user) {
     return (
@@ -115,13 +148,25 @@ export default function AdminPage() {
       </form>
 
       <h2 style={{ marginTop: "2rem" }}>Existing Reports</h2>
-      <ul>
+      {/* <ul>
         {reports.map((r) => (
           <li key={r.id}>
             <strong>{r.title}</strong> — <a href={r.url} target="_blank">View</a>
           </li>
         ))}
+      </ul> */}
+      <ul>
+        {reports.map((r) => (
+          <li key={r.id} style={{ marginBottom: "1rem" }}>
+            <strong>{r.title}</strong> —{" "}
+            <a href={r.url} target="_blank" rel="noopener noreferrer">View</a>{" "}
+            <button onClick={() => deleteReport(r.id)} style={{ marginLeft: "1rem", color: "white", backgroundColor: "#e63946", border: "none", padding: "0.3rem 0.6rem", cursor: "pointer" }}>
+              Delete
+            </button>
+          </li>
+        ))}
       </ul>
+
     </div>
   );
 }
